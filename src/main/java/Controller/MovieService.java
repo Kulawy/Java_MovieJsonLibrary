@@ -23,6 +23,14 @@ public class MovieService {
         this._path = _path;
     }
 
+    public List<Movie> get_movies() {
+        return _movies;
+    }
+
+    public void set_movies(List<Movie> _movies) {
+        this._movies = _movies;
+    }
+
     public Movie[] mapToMovieArray(MovieMap[] _mmapArray){
         Movie[] ma = new Movie[_mmapArray.length];
         for (int i=0; i < ma.length; i++) {
@@ -77,6 +85,16 @@ public class MovieService {
         convertFromJsonToMovie();
         _movies.add(_movieMap.mapToMovie());
         System.out.println(_movieMap + "\n Movie Added");
+    }
+
+    public ArrayList<Movie> searchByYear(int min, int max){
+        ArrayList<Movie> searchedMovies = new ArrayList<Movie>();
+
+        for(Movie m: _movies){
+            if ( m.getYear() >= min && m.getYear() <= max)
+                searchedMovies.add(m);
+        }
+        return searchedMovies;
     }
 
 
