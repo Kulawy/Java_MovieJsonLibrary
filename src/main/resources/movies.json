@@ -1,0 +1,36 @@
+[
+{
+    "title":"Venom",
+    "released":"05/10/2018",
+    "runtime":"112",
+    "director":"Ruben Fleischer",
+    "genres":[
+        "Action", 
+        "Horror", 
+        "Sci-Fi"
+    ],
+    "actors":[
+        "Tom Hardy", 
+        "Michelle Williams", 
+        "Riz Ahmed", 
+        "Scott Haze"
+    ]
+},
+{
+    "title":"Thor",
+    "released":"06/05/2011",
+    "runtime":"115",
+    "director":"Kenneth Branagh",
+    "genres":[
+        "Action", 
+        "Adventure", 
+        "Fantasy"
+    ],
+    "actors":[
+        "Chris Hemsworth",
+        "Natalie Portman",
+        "Tom Hiddleston",
+        "Anthony Hopkins"
+    ]
+}
+]
