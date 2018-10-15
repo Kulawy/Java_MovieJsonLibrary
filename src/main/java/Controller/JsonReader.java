@@ -1,11 +1,7 @@
 package Controller;
-
-import Model.Movie;
 import Model.MovieMap;
 import com.google.gson.Gson;
-
 import java.io.FileReader;
-import java.util.List;
 
 public class JsonReader {
 
@@ -16,9 +12,6 @@ public class JsonReader {
         _gson = new Gson();
         _actualFile = actualFile;
     }
-
-    //Movie movie = _gson.fromJson(new FileReader("D:\\file.json"), Movie.class);
-    //Movie movie = _gson.fromJson(_actualFile, Movie.class);
 
     public MovieMap readObj(){
         return _gson.fromJson(_actualFile, MovieMap.class);

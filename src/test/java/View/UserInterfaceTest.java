@@ -6,8 +6,6 @@ import Controller.MovieService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserInterfaceTest {
 
     private static UserInterface ui;
@@ -18,7 +16,7 @@ class UserInterfaceTest {
     public static void beforeAll(){
         ui = new UserInterface();
         ms = new MovieService();
-        ms.initTable();
+        ms.initTableJson();
     }
 
     @Test

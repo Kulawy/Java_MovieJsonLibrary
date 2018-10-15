@@ -8,10 +8,6 @@ public class FileReceiver {
 
     private FileReader _file;
 
-    public FileReceiver() {
-
-    }
-
     public FileReader getFile(){
         return _file;
     }

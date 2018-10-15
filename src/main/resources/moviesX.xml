@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>Venom</title>
+        <released>05/10/2018</released>
+        <runtime>112</runtime>
+        <director>Ruben Fleischer</director>
+        <genres>
+            Action,
+            Horror,
+            Sci-fi
+        </genres>
+        <actors>
+            Tom Hardy,
+            Michelle Williams,
+            Riz Ahmed,
+            Scott Haze
+        </actors>
+    </movie>
+    <movie>
+        <title>Thor</title>
+        <released>06/05/2011</released>
+        <runtime>115</runtime>
+        <director>Kenneth Branagh</director>
+        <genres>
+            Action,
+            Adventure,
+            Fantasy
+        </genres>
+        <actors>
+            Chris Hemsworth,
+            Natalie Portman,
+            Tom Hiddleston,
+            Anthony Hopkins
+        </actors>
+    </movie>
+</movies>

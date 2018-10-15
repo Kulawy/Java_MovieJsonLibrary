@@ -1,12 +1,8 @@
 package View;
 
-import Controller.FileReceiver;
-import Controller.JsonReader;
 import Controller.MovieService;
-import Model.Genre;
 import Model.Movie;
 import Model.MovieMap;
-import Model.Person;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -17,29 +13,36 @@ public class UserInterface {
 
     private FileReader _file;
     private MovieMap _movieMap;
-    private List<Movie> _movies = new ArrayList<>();
+    private List<Movie> _movies;
     private Scanner _sc;
     private String _command;
     private String _path;
     private MovieService _mService;
 
-    private final String INSTRUCTIONS = "Key:           Action:\n" +
-            "l              upload file\n" +
-            "init one       set all work for one movie\n" +
-            "init table     set all work for table\n" +
-            "cjm            convert form JSON file to Movie String Object\n" +
-            "cxm            convert form XML file to Movie String Object\n" +
-            "map            map String Object to Movie Object\n" +
-            "filter         Filter Object by gemre\n" +
-            "search         search movie by actor\n" +
-            "pmm            print uploaded MovieMap\n" +
-            "pm             print uploaded Movie\n" +
-            "add            to add whole movie\n" +
+    private final String INSTRUCTIONS =
+            "\nNum:     Action:\n" +
+            "01     upload file\n" +
+            "02     convert form JSON file to Movie String Object\n" +
+            "03     convert form XML file to Movie String Object\n" +
+            "04     map String Object to Movie Object\n" +
+
+            "97     add movie\n" +
+            "98     init add one movie\n" +
+            "99     init add Movies for table\n" +
+
+            "21     Filter Object by gemre\n" +
+            "22     search movie by actor\n" +
+            "23     search movie by Year\n" +
+
+            "31     print uploaded MovieMap\n" +
+            "32     print uploaded Movie\n" +
+
             "exit           to exit";
 
     public UserInterface(){
-        _mService = new MovieService();
         _sc = new Scanner(System.in);
+        _mService = new MovieService();
+        _movieMap = new MovieMap();
         System.out.println("Hello, Welcome on Json Service\nType your command and press enter");
         System.out.println(INSTRUCTIONS);
     }
@@ -49,35 +52,45 @@ public class UserInterface {
         System.out.println();
         while ( !_command.toLowerCase().equals("exit")){
             switch (_command){
-                case "add":
-                    _mService.addMovie();
-                    break;
-                case "init one":
-                    _mService.initOnebyOne();
-                    break;
-                case "init table":
-                    _mService.initTable();
-                    break;
-                case "l":
+                case "01":
                     setFilePath();
                     _mService.uploadFile();
                     break;
-                case "cjm":
+                case "02":
                     _mService.convertFromJsonToMovie();
                     break;
-                case "pmm":
-                    printMovieMap();
-                case "pm":
-                    printMovie();
+                case "04":
+                    map();
                     break;
-                case "map":
-                    _movies.add(_movieMap.mapToMovie());
+                case "96":
+                    _mService.addMovie();
                     break;
-                case "filter":
+                case "97":
+                    setFilePath();
+                    _mService.addMovies();
+                    break;
+                case "98":
+                    _mService.initOnebyOne();
+                    break;
+                case "99":
+                    _mService.initTableJson();
+                    break;
+                case "99x":
+                    _mService.initTableXml();
+                    break;
+                case "21":
                     filter();
                     break;
-                case "search":
-                    search();
+                case "22":
+                    searchByActor();
+                    break;
+                case "23":
+                    searchByYearUI();
+                    break;
+                case "31":
+                    printMovieMap();
+                case "32":
+                    printMovies();
                     break;
                 default:
                     System.out.println("Bad command");
@@ -88,49 +101,56 @@ public class UserInterface {
         }
     }
 
-    public void search() {
+    private void map() {
+        _movies = new ArrayList<>();
+        _movies = _mService.get_movies();
+        _movies.add(_movieMap.mapToMovie());
+        _mService.set_movies(_movies);
+    }
+
+    public void searchByActor() {
         System.out.println("Type first name");
         String firstName = _sc.nextLine();
         System.out.println("Type last name");
         String lastName = _sc.nextLine();
-        List<Movie> moviesThatContains = new ArrayList<>();
-        Person sa = new Person(firstName, lastName);
-        for( Movie m: _movies){
-            for( Person p: m.get_actors()){
-                if ( p.equals(sa))
-                    moviesThatContains.add(m);
-            }
-        }
-        System.out.println(moviesThatContains);
+        printMovies(_mService.searchByActor(firstName,lastName));
     }
 
     public void filter() {
         System.out.println("Type gemre:");
         String gS = _sc.nextLine();
-        List<Movie> moviesThatContains = new ArrayList<>();
-        for (Movie m: _movies) {
-            for(String g: m.get_genre()){
-                if ( g.toLowerCase().equals(gS.toLowerCase()))
-                    moviesThatContains.add(m);
-            }
-        }
-        System.out.println(moviesThatContains);
+        printMovies(_mService.filterByGenre(gS));
     }
 
     private void printMovieMap() {
         System.out.println(_movieMap+"\n");
     }
 
-    private void printMovie() {
-        for(Movie m: _movies){
+    private void printMovies() {
+        for(Movie m: _mService.get_movies()){
             System.out.println(m+"\n");
-        };
+        }
+    }
+
+    private void printMovies(List<Movie> movieList) {
+        System.out.println();
+        for(Movie m: movieList){
+            System.out.println(m+"\n");
+        }
     }
 
     private void setFilePath(){
         System.out.println("Set path to the file: ");
         _path = _sc.nextLine();
         _mService.set_path(_path);
+    }
+
+    private void searchByYearUI(){
+        System.out.println("Set min Year in format: YYYY");
+        int min = _sc.nextInt();
+        System.out.println("Set max Year in format: YYYY");
+        int max = _sc.nextInt();
+        printMovies(_mService.searchByYear(min, max));
     }
 
 }

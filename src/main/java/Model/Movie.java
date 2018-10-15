@@ -9,6 +9,11 @@ public class Movie {
     private Date _relased;
     private int _runtime;
     private Person _director;
+    private int _year;
+
+    public int getYear() {
+        return _year;
+    }
 
     public String get_title() {
         return _title;
@@ -61,13 +66,14 @@ public class Movie {
     private List<String> _genre;
     private List<Person> _actors;
 
-    public Movie(String _title, Date _relased, int _runtime, Person _director, List<String> _genre, List<Person> _actors) {
+    public Movie(String _title, Date _relased, int _runtime, Person _director, List<String> _genre, List<Person> _actors, int year) {
         this._title = _title;
         this._relased = _relased;
         this._runtime = _runtime;
         this._director = _director;
         this._genre = _genre;
         this._actors = _actors;
+        this._year = year;
     }
 
     @Override
