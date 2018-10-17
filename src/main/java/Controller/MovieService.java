@@ -31,10 +31,19 @@ public class MovieService {
         this._movies = _movies;
     }
 
-    public void addMovies(){
+    public void addMoviesFromJson(){
         //_path = path;
         uploadFile();
         convertFromJsonToMovieMapTable();
+        for (int i=0; i < _movieMapArray.length; i++){
+            _movies.add(_movieMapArray[i].mapToMovie());
+        }
+    }
+
+    public void addMoviesFromXML(){
+        //_path = path;
+        uploadFile();
+        convertFromXmlToMovieMapTable();
         for (int i=0; i < _movieMapArray.length; i++){
             _movies.add(_movieMapArray[i].mapToMovie());
         }
@@ -93,12 +102,12 @@ public class MovieService {
     }
 
     public void convertFromJsonToMovie(){
-        JsonReader jR = new JsonReader(_file);
+        MyJsonReader jR = new MyJsonReader(_file);
         _movieMap = jR.readObj();
     }
 
     public void convertFromJsonToMovieMapTable(){
-        JsonReader jR = new JsonReader(_file);
+        MyJsonReader jR = new MyJsonReader(_file);
         _movieMapArray = jR.readArray();
     }
 

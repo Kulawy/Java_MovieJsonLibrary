@@ -3,12 +3,12 @@ import Model.MovieMap;
 import com.google.gson.Gson;
 import java.io.FileReader;
 
-public class JsonReader {
+public class MyJsonReader {
 
     private Gson _gson;
     private FileReader _actualFile;
 
-    public JsonReader(FileReader actualFile) {
+    public MyJsonReader(FileReader actualFile) {
         _gson = new Gson();
         _actualFile = actualFile;
     }
