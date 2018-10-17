@@ -86,13 +86,6 @@ public class UserInterface {
         _mService.convertFromJsonToMovie();
     }
 
-    private void map() {
-        _movies = new ArrayList<>();
-        _movies = _mService.get_movies();
-        _movies.add(_movieMap.mapToMovie());
-        _mService.set_movies(_movies);
-    }
-
     public void searchByActor() {
         System.out.println("Type first name");
         String firstName = _sc.nextLine();
@@ -105,10 +98,6 @@ public class UserInterface {
         System.out.println("Type gemre:");
         String gS = _sc.nextLine();
         printMovies(_mService.filterByGenre(gS));
-    }
-
-    private void printMovieMap() {
-        System.out.println(_movieMap + "\n");
     }
 
     public boolean printMovies() {
@@ -254,4 +243,16 @@ public void start(){
             System.out.println();
         }
     }
+
+    private void map() {
+        _movies = new ArrayList<>();
+        _movies = _mService.get_movies();
+        _movies.add(_movieMap.mapToMovie());
+        _mService.set_movies(_movies);
+    }
+
+    private void printMovieMap() {
+        System.out.println(_movieMap + "\n");
+    }
+
  */
