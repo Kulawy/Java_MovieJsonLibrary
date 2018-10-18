@@ -23,12 +23,12 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void shouldPrintTrue(){
+    public void shouldPrintTrueTest(){
         Assert.assertTrue(_ui.printMovies());
     }
 
     @Test
-    public void shouldPrintString(){
+    public void shouldPrintStringTest(){
         String outputS = "Title: Venom\n" +
                 "Date: Fri Oct 05 00:00:00 CEST 2018\n" +
                 "Runetime: 112 min\n" +
